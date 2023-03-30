@@ -8,11 +8,6 @@ import 'res/country_codes.dart';
 import 'utils.dart';
 
 class CountryListView extends StatefulWidget {
-  /// Called when a country is select.
-  ///
-  /// The country picker passes the new value to the callback.
-  final ValueChanged<Country> onSelect;
-
   /// An optional [showPhoneCode] argument can be used to show phone code.
   final bool showPhoneCode;
 
@@ -45,7 +40,6 @@ class CountryListView extends StatefulWidget {
 
   const CountryListView({
     Key? key,
-    required this.onSelect,
     this.exclude,
     this.favorite,
     this.countryFilter,
@@ -182,8 +176,7 @@ class _CountryListViewState extends State<CountryListView> {
           country.nameLocalized = CountryLocalizations.of(context)
               ?.countryName(countryCode: country.countryCode)
               ?.replaceAll(RegExp(r"\s+"), " ");
-          widget.onSelect(country);
-          Navigator.pop(context);
+          Navigator.pop(context, country);
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 5.0),

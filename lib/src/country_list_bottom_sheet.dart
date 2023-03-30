@@ -4,10 +4,8 @@ import 'country.dart';
 import 'country_list_theme_data.dart';
 import 'country_list_view.dart';
 
-void showCountryListBottomSheet({
+Future showCountryListBottomSheet({
   required BuildContext context,
-  required ValueChanged<Country> onSelect,
-  VoidCallback? onClosed,
   List<String>? favorite,
   List<String>? exclude,
   List<String>? countryFilter,
@@ -18,14 +16,13 @@ void showCountryListBottomSheet({
   bool showSearch = true,
   bool useSafeArea = false,
 }) {
-  showModalBottomSheet(
+  return showModalBottomSheet(
     context: context,
     isScrollControlled: true,
     backgroundColor: Colors.transparent,
     useSafeArea: useSafeArea,
     builder: (context) => _builder(
       context,
-      onSelect,
       favorite,
       exclude,
       countryFilter,
@@ -35,14 +32,11 @@ void showCountryListBottomSheet({
       showWorldWide,
       showSearch,
     ),
-  ).whenComplete(() {
-    if (onClosed != null) onClosed();
-  });
+  );
 }
 
 Widget _builder(
   BuildContext context,
-  ValueChanged<Country> onSelect,
   List<String>? favorite,
   List<String>? exclude,
   List<String>? countryFilter,
@@ -82,7 +76,6 @@ Widget _builder(
       borderRadius: _borderRadius,
     ),
     child: CountryListView(
-      onSelect: onSelect,
       exclude: exclude,
       favorite: favorite,
       countryFilter: countryFilter,

@@ -2,7 +2,6 @@ library country_picker;
 
 import 'package:flutter/material.dart';
 
-import 'src/country.dart';
 import 'src/country_list_bottom_sheet.dart';
 import 'src/country_list_theme_data.dart';
 
@@ -45,8 +44,6 @@ export 'src/country_service.dart';
 /// can be safely removed from the tree before the bottom sheet is closed.
 void showCountryPicker({
   required BuildContext context,
-  required ValueChanged<Country> onSelect,
-  VoidCallback? onClosed,
   List<String>? favorite,
   List<String>? exclude,
   List<String>? countryFilter,
@@ -63,8 +60,6 @@ void showCountryPicker({
   );
   showCountryListBottomSheet(
     context: context,
-    onSelect: onSelect,
-    onClosed: onClosed,
     exclude: exclude,
     favorite: favorite,
     countryFilter: countryFilter,
